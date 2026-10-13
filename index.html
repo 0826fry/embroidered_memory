@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f5f2ed" />
+  <title>Embroidered Memory</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar" aria-label="Project controls">
+      <a class="brand" href="#" id="brand" aria-label="Embroidered Memory home">EMBROIDERED MEMORY</a>
+
+      <div class="actions" id="actions" hidden>
+        <button class="text-button" id="clearBtn" type="button">Clear stitches</button>
+        <button class="text-button" id="newBtn" type="button">New image</button>
+        <button class="primary-button" id="exportBtn" type="button">Export PNG</button>
+      </div>
+    </header>
+
+    <section class="landing" id="landing">
+      <label class="upload-card" for="fileInput">
+        <span class="upload-kicker">STITCH MEMORY INTO A PHOTOGRAPH</span>
+        <span class="upload-title">Upload an image</span>
+        <span class="upload-sub">JPG, PNG, WEBP · your image stays in this browser</span>
+      </label>
+      <input id="fileInput" class="file-input" type="file" accept="image/*" />
+    </section>
+
+    <section class="workspace" id="workspace" hidden aria-label="Embroidery editor">
+      <div class="stage-shell">
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="artCanvas" aria-label="Uploaded photograph and embroidered text"></canvas>
+
+          <div class="position-marker" id="positionMarker" aria-hidden="true"></div>
+          <div class="ghost-text" id="ghostText" aria-hidden="true"></div>
+
+          <div class="stitch-status" id="stitchStatus" aria-live="polite">
+            <span class="status-dot"></span>
+            <span id="statusText">Click the photo, then type</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-hint">
+        <span>Click to place text</span>
+        <span class="dot-separator">·</span>
+        <span>Space or Enter to stitch</span>
+        <span class="dot-separator">·</span>
+        <span>Esc to cancel preview</span>
+      </div>
+
+      <!--
+        Real IME input lives here. It is intentionally kept off-screen instead of
+        using a contenteditable overlay so browser composition events remain reliable.
+      -->
+      <textarea
+        id="imeInput"
+        class="ime-input"
+        rows="1"
+        autocomplete="off"
+        autocapitalize="sentences"
+        spellcheck="false"
+        aria-label="Text to embroider"
+      ></textarea>
+    </section>
+
+    <canvas id="baseCanvas" hidden></canvas>
+    <canvas id="maskCanvas" hidden></canvas>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
